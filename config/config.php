@@ -4,7 +4,7 @@
 $host = "localhost";
 $user = "root";
 $pwd = "";
-$dbname = "erp";
+$dbname = "donations";
 
 //CREATE CONNECTION
 try {

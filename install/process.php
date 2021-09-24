@@ -19,14 +19,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $conn ->exec($sql);
         echo "Database created successfully<br>";
 
-        //criar arquivo config.txt
-        $config = ["host_name" =>"{$data["host_name"]}", "db_name" => "{$data["db_name"]}", "user_name" => "{$data["user_name"]}", "password" =>"{$data["password"]}"];
-        $directory = __DIR__."../config/";
-        $fileName = $directory . "config.txt";
-        $handle = fopen($fileName, 'a+');
-        fwrite($handle, $config);
-        fclose($handle);
+        if(!is_file(__DIR__."/config.txt")){
+            $config = ["host_name" =>"{$data["host_name"]}", "db_name" => "{$data["db_name"]}", "user_name" => "{$data["user_name"]}", "password" =>"{$data["password"]}", "charset" => "{$data["charset"]}"];
 
+            $file = "config.txt";
+            $handle = fopen($file, 'a+');
+            fwrite($handle, implode($config));
+            fclose($handle);
+        }
     } catch(PDOException $e) {
         echo $sql . "<br>" . $e->getMessage();
     }
