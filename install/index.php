@@ -63,7 +63,7 @@
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control document" id="password" name="password"
-                           aria-describedby="password" minlength="14"/>
+                           aria-describedby="password"/>
                     <div id="password" class="form-text">Please set your social number</div>
                     <div class="valid-feedback">
                         Looks good!
@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="charset" class="form-label">Encode</label>
+                    <label for="charset" class="form-label">Charset</label>
                     <input type="text" class="form-control" id="charset" name="charset"
                            aria-describedby="charset"/>
                     <div id="charset" class="form-text">Please set a charset enconde</div>
