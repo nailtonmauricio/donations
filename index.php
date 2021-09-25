@@ -1,6 +1,16 @@
 <?php
 session_start();
+$config = scandir("install");
+if(!in_array("config.txt", $config)){
+    //echo "arquivo não existe";
+    $_SESSION["msg"] = "<div class='alert alert-danger alert-dismissible fade show text-center' role='alert'>
+  <strong>Realize a configuração do banco de dados</strong>
+  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+    header("Location: install/index.php");
+}
+
 include_once "config/config.php";
+
 
 $sql = "SELECT customers.id, customers.name, customers.birth_date, customers.document, customers.phone, customers.email, customers.address, customers.updated_at, customers.contribution, frequency.id AS frequency_id, frequency.name AS frequency, payments.id AS payment_id, payments.type AS payment FROM customers JOIN frequency ON customers.frequency_id = frequency.id JOIN payments ON customers.payment_id = payments.id ORDER BY customers.id";
 $res = $conn->prepare($sql);
@@ -8,6 +18,12 @@ $res->execute();
 $row = $res->fetchAll(PDO::FETCH_ASSOC);
 //DEBUG
 #$res->debugDumpParams();
+
+$config = scandir("install");
+if(!in_array("config.txt", $config)){
+    //echo "arquivo não existe";
+    header("Location: /install/index.php");
+}
 ?>
 <!doctype html>
 <html lang="pt-br" xmlns="http://www.w3.org/1999/html">

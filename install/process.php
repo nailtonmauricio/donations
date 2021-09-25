@@ -2,9 +2,6 @@
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $data = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
-    /*var_dump(
-        $data
-    );*/
 
     //criar validações para os campos
 

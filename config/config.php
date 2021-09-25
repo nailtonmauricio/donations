@@ -1,6 +1,13 @@
 <?php
 
-$handle = fopen("c:\\xampp\\htdocs\\donations\\install\\config.txt", "r");
+if(DIRECTORY_SEPARATOR == "/"){
+    $handle = fopen("/config.txt", "r");
+} else {
+    $path = realpath("install/config.txt");
+    $handle = fopen("c:\\xampp\\htdocs\\donations\\install\\config.txt", "r");
+}
+
+
 $result = explode(";", fgets($handle));
 fclose($handle);
 

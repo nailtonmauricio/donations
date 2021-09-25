@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="pt-br" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -19,6 +22,12 @@
     </style>
 </head>
 <body>
+<?php
+    if(isset($_SESSION["msg"])){
+        echo $_SESSION["msg"];
+        unset($_SESSION["msg"]);
+    }
+?>
 <h1>DB Configuration</h1>
 <div class="container-fluid">
     <div class="row">
