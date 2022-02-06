@@ -1,21 +1,14 @@
 <?php
 
-if(DIRECTORY_SEPARATOR == "/"){
-    $handle = fopen("/config.txt", "r");
-} else {
-    $path = realpath("install/config.txt");
-    $handle = fopen("c:\\xampp\\htdocs\\donations\\install\\config.txt", "r");
-}
-
-
+$handle = fopen("install/config.txt", "r");
 $result = explode(";", fgets($handle));
 fclose($handle);
 
-$host = $result[0];
+$host    = $result[0];
 $db_name = $result[1];
 $charset = $result[2];
-$user = $result[3];
-$pwd = $result[4];
+$user    = $result[3];
+$pwd     = $result[4];
 
 //CREATE CONNECTION
 try {

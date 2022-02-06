@@ -15,10 +15,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $conn ->exec($sql);
         //echo "Database created successfully<br>";
 
+
+        //Cria o arquivo de configuração em /config/config.php
         if(!is_file(__DIR__."/config.txt")){
             $statment = array("{$data["host_name"]}", "{$data["db_name"]}", "{$data["charset"]}", "{$data["user_name"]}", "{$data["password"]}");
             $config_file = implode(";", $statment);
 
+            //Criação do arquivo config.txt com os dados vindos pelo formulário de instalação
             $file = "config.txt";
             $handle = fopen($file, 'a+');
             fwrite($handle, $config_file);
@@ -26,10 +29,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
 
     } catch(PDOException $e) {
-        echo $sql . "<br>" . $e->getMessage();
+        echo $e->getMessage();
     }
     try{
-        require_once "../config/config.php";
+        //CREATE CONNECTION
+        try {
+            $conn = new PDO("mysql:host={$data["host_name"]}; dbname={$data["db_name"]}; charset={$data["charset"]}", $data["user_name"], $data["password"]);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            $e->getMessage();
+        }
+
 
         $sqlFrequency = "CREATE TABLE `frequency` (`id` int(11) NOT NULL AUTO_INCREMENT,`name` varchar(60) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8";
         $conn -> exec($sqlFrequency);

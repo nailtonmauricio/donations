@@ -1,8 +1,9 @@
 <?php
+
 session_start();
 $config = scandir("install");
 if(!in_array("config.txt", $config)){
-    //echo "arquivo não existe";
+
     $_SESSION["msg"] = "<div class='alert alert-danger alert-dismissible fade show text-center' role='alert'>
   <strong>Realize a configuração do banco de dados</strong>
   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
@@ -16,14 +17,7 @@ $sql = "SELECT customers.id, customers.name, customers.birth_date, customers.doc
 $res = $conn->prepare($sql);
 $res->execute();
 $row = $res->fetchAll(PDO::FETCH_ASSOC);
-//DEBUG
-#$res->debugDumpParams();
 
-$config = scandir("install");
-if(!in_array("config.txt", $config)){
-    //echo "arquivo não existe";
-    header("Location: /install/index.php");
-}
 ?>
 <!doctype html>
 <html lang="pt-br" xmlns="http://www.w3.org/1999/html">

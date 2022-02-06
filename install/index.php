@@ -1,8 +1,16 @@
 <?php
+
 session_start();
+
+$config = scandir("./");
+if(in_array("config.txt", $config)){
+    echo "Arquivo existe";
+    header("Location: ../index.php");
+}
+
 ?>
 <!doctype html>
-<html lang="pt-br" xmlns="http://www.w3.org/1999/html">
+<html lang="pt-br">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8"/>
